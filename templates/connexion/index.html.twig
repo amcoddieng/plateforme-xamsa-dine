@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConnexionController!{% endblock %}
+
+{% block body %}
+{% if error %}
+    <div class="alert alert-danger" role="alert">
+        <h3>Erreur de connection verifier vos donnees saisi</h3>
+    </div>
+{% endif %}
+    <style>
+        .login-container {
+            max-width: 30%; /* Réduit la largeur du conteneur */
+            margin: auto;
+            padding: 1rem; /* Réduit le padding interne */
+            background-color: #f8f9fa;
+            border-radius: .25rem; /* Réduit le rayon des bordures */
+            box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.1);
+        }
+        .btn-custom {
+            background-color: #28a745; /* Couleur verte */
+            color: white;
+            font-size: .875rem; /* Réduit la taille du texte du bouton */
+        }
+        .btn-custom:hover {
+            background-color: #218838; /* Couleur verte plus foncée pour le survol */
+            color: white;
+        }
+        .form-label {
+            font-size: .875rem; /* Réduit la taille du texte des labels */
+        }
+        .form-control {
+            font-size: .875rem; /* Réduit la taille du texte des champs de formulaire */
+            padding: .375rem .75rem; /* Réduit le padding interne des champs */
+        }
+    </style>
+
+    <div class="login-container">
+        {% for label, messages in app.flashes %}
+        <div class="alert alert-{{ label }} text-center">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <h2 class="text-center mb-3">Connexion</h2>
+        <form method="post" action="{{ path('app_connexion')}}">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="_username" value="{{ email }}" placeholder="Entrez votre adresse email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" name="_password" placeholder="Entrez votre mot de passe" required>
+            </div>
+            <input type="hidden" name="_target_path" value="{{ path('app_home') }}">
+            <button type="submit" class="btn btn-custom w-100">Se connecter</button>
+        </form>
+    </div>
+
+{% endblock %}

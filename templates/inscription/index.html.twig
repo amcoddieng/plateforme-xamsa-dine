@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<style>
+            .login-container {
+            max-width: 30%; /* Réduit la largeur du conteneur */
+            margin: auto;
+            padding: 1rem; /* Réduit le padding interne */
+            background-color: #f8f9fa;
+            border-radius: .25rem; /* Réduit le rayon des bordures */
+            box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.1);
+        }
+</style>
+<div>
+    <div class="login-container">
+    <h1 class="text-center">Inscription</h1>
+    {{form(form)}}
+    </div>
+</div>
+{% endblock %}
