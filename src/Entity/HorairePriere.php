@@ -26,6 +26,12 @@ class HorairePriere
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_fin = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $region = null;
+
+    #[ORM\Column(length: 20)]
+    private ?string $iso3166 = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +81,30 @@ class HorairePriere
     public function setDateFin(\DateTimeInterface $date_fin): static
     {
         $this->date_fin = $date_fin;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(string $region): static
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getIso3166(): ?string
+    {
+        return $this->iso3166;
+    }
+
+    public function setIso3166(string $iso3166): static
+    {
+        $this->iso3166 = $iso3166;
 
         return $this;
     }

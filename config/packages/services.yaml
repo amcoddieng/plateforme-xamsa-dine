@@ -1,0 +1,10 @@
+services:
+    # Les services auto-découverts seront enregistrés ici
+    _defaults:
+        autowire: true      # Activer l'autowiring pour les services
+        autoconfigure: true # Activer l'autoconfiguration pour les services
+
+    # Service personnalisé RecupISO
+    App\Service\RecupISO:
+        arguments:
+            $httpClient: '@http_client'

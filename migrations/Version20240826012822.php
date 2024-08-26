@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240824195053 extends AbstractMigration
+final class Version20240826012822 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -26,7 +26,7 @@ final class Version20240824195053 extends AbstractMigration
         $this->addSql('CREATE TABLE coran_audio_quari (coran_audio_id INT NOT NULL, quari_id INT NOT NULL, INDEX IDX_6CDF11076C79CC07 (coran_audio_id), INDEX IDX_6CDF1107241C7A10 (quari_id), PRIMARY KEY(coran_audio_id, quari_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE doua (id INT AUTO_INCREMENT NOT NULL, titre VARCHAR(255) NOT NULL, contenu_ar VARCHAR(255) NOT NULL, contenu_fr VARCHAR(255) NOT NULL, signification VARCHAR(255) NOT NULL, date_ajout DATE NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE event (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, date_event DATE NOT NULL, lieu VARCHAR(255) NOT NULL, video VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL, date_ajout DATE NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE horaire_priere (id INT AUTO_INCREMENT NOT NULL, priere VARCHAR(255) NOT NULL, heure TIME NOT NULL, date_debut DATE NOT NULL, date_fin DATE NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE horaire_priere (id INT AUTO_INCREMENT NOT NULL, priere VARCHAR(255) NOT NULL, heure TIME NOT NULL, date_debut DATE NOT NULL, date_fin DATE NOT NULL, region VARCHAR(255) NOT NULL, iso3166 VARCHAR(20) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE moderateur (id INT AUTO_INCREMENT NOT NULL, email_id INT NOT NULL, autorisation TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_6DDC3554A832C1C9 (email_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE muezzin (id INT AUTO_INCREMENT NOT NULL, users_id INT DEFAULT NULL, nom VARCHAR(255) NOT NULL, mosque VARCHAR(255) NOT NULL, audio VARCHAR(255) NOT NULL, INDEX IDX_3EE1A7DB67B3B43D (users_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE quari (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
