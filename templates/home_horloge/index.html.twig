@@ -1,20 +1,176 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeHorlogeController!{% endblock %}
-
-{% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+        .card {
+            flex: 0 0 auto; /* Empêche la carte de se casser en ligne */
+            width: 170px; /* Largeur fixe des cartes */
+            margin-right: px; /* Espace entre les cartes */
+            height:220px;
+        }
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        .prayer-card {
+            background-color: #f8f9fa;
+            border-radius: px;
+            box-shadow: 0 0 4px 3px rgb(25, 135, 84);
+            overflow: hidden;
+            transition: transform 0.6s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: auto;
+        }
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/xampp/htdocs/xamsa_dine/src/Controller/HomeHorlogeController.php</code></li>
-        <li>Your template at <code>C:/xampp/htdocs/xamsa_dine/templates/home_horloge/index.html.twig</code></li>
-    </ul>
-</div>
-{% endblock %}
+        .card-container {
+            display: flex;
+            justify-content: space-evenly; /* Aligne les cartes au début du conteneur */
+            flex-wrap: nowrap; /* Empêche les cartes de passer à la ligne suivante */
+            overflow-x: auto; /* Permet le défilement horizontal */
+            padding: 10px 0; /* Ajoute de l'espace autour des cartes */
+            overflow-y: hidden; /* Masque le défilement vertical */
+        }
+
+        .card-container::-webkit-scrollbar {
+            height: 0px; /* Hauteur de la barre de défilement pour les navigateurs Webkit */
+        }
+
+        .card-container::-webkit-scrollbar-thumb {
+            background-color: #6b9bd1; /* Couleur de la barre de défilement */
+            border-radius: 10px; /* Bords arrondis pour la barre de défilement */
+        }
+
+        .card-container::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Couleur de l'arrière-plan de la piste de défilement */
+        }
+
+        .prayer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .prayer-card .card-body {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .prayer-card .card-title {
+            font-size: 1.25rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .prayer-card .card-text {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .prayer-card .card-footer {
+            background-color: rgb(25, 135, 84);
+            color: #fff; /* Couleur du texte */
+            border-top: 1px solid #ddd; /* Bordure supérieure discrète */
+            text-align: center; /* Centre le texte */
+            padding: 10px; /* Espacement interne */
+        }
+
+        .prayer-card .icon {
+            font-size: 3rem; /* Taille de l'icône */
+            color: rgb(25, 135, 84);
+            margin-bottom: 15px; /* Espacement sous l'icône */
+        }
+
+        /* Media Queries pour ajuster la taille des cartes sur les écrans plus petits */
+        @media (max-width: 768px) {
+            .card-container {
+                padding: 10px 5px; /* Réduit l'espace autour des cartes */
+            }
+            .card {
+                width: 150px; /* Réduit la largeur des cartes sur les petits écrans */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card {
+                width: 0px; /* Réduit encore plus la largeur des cartes sur les très petits écrans */
+            }
+            .prayer-card .card-title {
+                font-size: 1rem; /* Réduit la taille de la police du titre */
+            }
+            .prayer-card .card-text {
+                font-size: 0.875rem; /* Réduit la taille de la police du texte */
+            }
+        }
+        .region{
+            color:white;
+            background-color:rgb(25, 135, 84);
+            font-weight:bold;
+            border:rgb(25, 135, 84) solid;
+            border-radius:3px;
+            padding:1px;
+        }
+    </style>
+    {% if Region == "" %}
+        <script src="{{ asset('assets/js/obtenirISO.js')}}"></script>
+    {% endif %}
+    
+    <section class="container-fluid w-100 my-0 border " >
+        <div class=" h-100 container border-success ">
+            <div class="row d-flex justify-content-evenly">
+                <div class="col-sm-5  d-flex justify-content-evenly" style="border:3px #155724 solid">
+                    {% include 'home_coran/index.html.twig' %}
+                </div>
+                <div class="col-sm-2 ">
+                    {% include 'home_horloge/horloge.html.twig' %}
+                </div>
+                <div class="col-sm-5 border bg-success">
+                    ff
+                </div>
+            </div>
+        </div>
+        <div class=" container d-flex justify-content-evenly fw-bolder my-1">  
+
+            <form class"container-fluid w-100" method="get" action="{{ path('app_home') }}">
+
+                <select class="region" name="region" id="region" onchange="this.form.submit()">
+                    <option value="">--Choisir une région--</option>
+                    <option value="dakar" {% if Region == 'dakar' %}selected{% endif %}>Dakar</option>
+                    <option value="kaolack" {% if Region == 'kaolack' %}selected{% endif %}>Kaolack</option>
+                    <option value="thies" {% if Region == 'thies' %}selected{% endif %}>Thies</option>
+                    <option value="louga" {% if Region == 'louga' %}selected{% endif %}>Louga</option>
+                    <option value="saint-louis" {% if Region == 'saint louis' %}selected{% endif %}>Saint Louis</option>
+                    <option value="fatick" {% if Region == 'fatick' %}selected{% endif %}>Fatick</option>
+                    <option value="kaffrine" {% if Region == 'kaffrine' %}selected{% endif %}>Kaffrine</option>
+                    <option value="kolda" {% if Region == 'kolda' %}selected{% endif %}>Kolda</option>
+                    <option value="ziguinchor" {% if Region == 'ziguinchor' %}selected{% endif %}>Ziguinchor</option>
+                    <option value="kedougou" {% if Region == 'kedougou' %}selected{% endif %}>Kedougou</option>
+                    <option value="matam" {% if Region == 'matam' %}selected{% endif %}>Matam</option>
+                    <option value="sedhiou" {% if Region == 'sedhiou' %}selected{% endif %}>Sedhiou</option>
+                    <option value="tambacounda" {% if Region == 'tambacounda' %}selected{% endif %}>Tambacounda</option>
+                    <option value="diourbel" {% if Region == 'diourbel' %}selected{% endif %}>Diourbel</option>
+                </select>
+                
+                <a class="region text-decoration-none" href="" name="region" id="region" onchange="this.form.submit()">Gerer mes Notification</a>
+
+            </form>
+            
+        </div>
+        
+        <div class="card-container bg-success border">
+
+        {% for horaire in horaires %}
+
+            <div class="card border-light prayer-card bg-light">
+                <div class="card-body">
+                    <h4 class="text-uppercase small">Heure de priere </h4>
+                    <div class="icon">
+                        <i class="bi bi-clock"></i> 
+                    </div>
+                    <h5 class="card-title  text-uppercase small">{{ horaire.priere }}</h5>
+                    <p class="card-text">{{ horaire.heure|date('H:i') }}</p>
+                </div>
+                <div class="card-footer">
+                    Region : {{ horaire.region }}
+                </div>
+            </div>
+
+        {% endfor %}
+
+        </div>
+</section>

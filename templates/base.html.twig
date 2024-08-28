@@ -8,7 +8,15 @@
             <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
             <style>
             body{
-              background-color:red;
+                  margin: 0;
+                  padding: 0;
+                  height: 100vh;
+                  /* display: flex; */
+                  justify-content: center;
+                  align-items: center;
+                  background-size: cover;
+                  background-color:white;
+                  /* background-image:url("{{ asset('upload/img/img_site/p1.jpg')}}"); */
             }
     .offcanvas-header { display: none; }
     #navbar_main{
@@ -80,9 +88,10 @@
     .bg-custom-color {
         background-color: #6b9bd1; /* Couleur personnalisée pour le fond */
     }
-    .container-fluid{
+    .container-fluid11{
     /*    display: flex;*/
-    margin-top:auto;
+    margin-top:10px;
+    height:13px;
     /*    justify-content: center;*/
     /*    align-items: center;*/
     /*    background-color: red;*/
@@ -113,7 +122,7 @@
 
     <!-- Navbar -->
     <nav id="navbar_main" class="mobile-offcanvas navbar navbar-expand-lg navbar-dark bg-success">
-    <div class="container-fluid">
+    <div class="container-fluid container-fluid11">
         <ul class="navbar-nav">
             <h2 class="text-center bg-light p-2 ms-2 me-2" translate="no">xamsa dine</h2>
         <li class="nav-item text-center active"><a class="nav-link" href="#">Accueil</a></li>
@@ -125,16 +134,16 @@
         <li class="nav-item text-center text-center"><a class="nav-link" href="#">Nous contacter</a></li>
         {% if app.user %}
         <li class="nav-item text-center text-center"><a class=" nav-link nom" href="#">{{ app.user.prenom }} {{ app.user.nom }}</a></li>
-        <li class="nav-item text-center"><a class="nav-link bg-danger text-white " href="{{ path('app_logout')}}">Deconnexion</a></li>
+        <li class="nav-item text-center input-sm"><a class="nav-link bg-danger text-white " href="{{ path('app_logout')}}">Deconnexion</a></li>
         {% else %}
         <li class="nav-item text-center ms-5 me-5"><a class="nav-link bg-custom-color text-white" href="{{ path('app_connexion')}}">Connexion</a></li>
         {% endif %}
         </ul>
     </div>
     </nav>
-    <main  style="border-left: 10px solid #198754;margin-top:-px;border-right: 10px solid #198754;">
+    {# <main  style="border-left: 10px solid #198754;margin-top:-px;border-right: 10px solid #198754;"> #}
         {% block body %}{% endblock %}
-    </main>
+    {# </main> #}
     </body>
     <script type="text/javascript">
   function assombrir_ecran(afficher) {
