@@ -25,6 +25,9 @@ class Coran
     #[ORM\Column(length: 255)]
     private ?string $langue = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Coran
     public function setLangue(string $langue): static
     {
         $this->langue = $langue;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

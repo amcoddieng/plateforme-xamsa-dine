@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture de livre en mode couleur</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  
+    <script src="{{ asset('assets/js/jquery.js')}}"></script>
+ <link rel="stylesheet" href="{{ asset('assets/css/css/bootstrap.min.css')}}">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            /* padding: 20px; */
+        }
+        .carousel-item {
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+            text-align: center;
+        }
+        .page-1 {
+            background-color: #6b9bd1; /* Bleu */
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .carousel-item {
+                font-size: 1.5rem; /* Réduction de la taille du texte */
+            }
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                width: 2rem; /* Réduction de la taille des icônes */
+                height: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .carousel-item {
+                font-size: 1.2rem; /* Réduction encore plus importante pour petits écrans */
+            }
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                width: 1.5rem; /* Encore plus petit pour les très petits écrans */
+                height: 1.5rem;
+            }
+        }
+        .coranContainer{
+            /* width:90%; */
+            /* height:90vh; */
+            margin:auto;
+            border: 5px #198754 solid;
+            /* border:solid; */
+        }
+        .p1, .p2 {
+            /* width:100%; */
+            /* border:solid; */
+            height:100%;
+        }
+        .img1{
+
+            /* width:90%; */
+            height:100%;
+            margin:auto;
+        }
+        .carouselContainer{
+            height:90vh;
+            border: 5px #198754 solid;
+            width:80vw;
+        }
+        .divDetailCoran{
+            border:11px #198754 solid;
+        }
+        .numberpage{
+            height:30px;
+            width:50px;
+            margin:auto;
+            border:none;
+            /* border-radius:10px; */
+            /* outline:none; */
+            /* background-color:white; */
+            text-align:center;
+            font-weight:bold;
+            font-size:130%;
+        }
+        .divSourate{
+            /* border:solid; */
+            height:85%;
+        }
+        .divPage{
+            /* border:solid; */
+            /* height:%; */
+        }
+        .lesSourate{
+            background-color:#198754;
+            list-style:none;
+            /* decoration:none; */
+            padding:0;
+            border:5px #198754 solid;
+            height:70vh;
+        }
+        .sourate{
+            letter-spacing:1px;
+            border:5px white solid;
+            font-size:100%;
+            padding:10px;
+            color:white;
+            cursor:pointer;
+            font-family:arabic;
+
+        }
+        .sourate:hover{
+            color:#198754;
+            background-color:white;
+            font-weight:bolder;
+        }
+    </style>
+</head>
+<body>
+
+<div class=" coranContainer">
+    
+    <div id="bookCarousel" class="row carousel slide ">
+
+        <div class="col col-9">
+            <div class="row bg-success carouselContainer d-flex justify-content-center">
+                <!-- Première image (colonne 1) -->
+                <div class="col-5 p-1 p1">
+                                        <img class="img-fluid img1" src="{{ asset('upload/img/img_site/5.png')}}"  alt="Image 1" />
+                </div>
+                                    
+                <!-- Deuxième image (colonne 2) -->
+                <div class="col-5 p-1 p1">
+                    <img class="img-fluid img1" src="{{ asset('upload/img/img_site/6.png')}}" alt="Image 2" />
+                </div>
+            </div>
+        </div>
+{# {{ dump(sourates) }} #}
+        <div class="col col-3 bg-light divDetailCoran">
+                <div>
+                    sourate en arabe :
+                </div>
+                <div class="divSourate">
+                    <ul class='lesSourate'>
+                        {% for sourate in sourates %}
+                            <li class="sourate" value="{{ sourate.numero }}" {% if numSourate == sourate.numero %}selected{% endif %}>
+                                Sourate : {{ sourate.souarte }}
+                                {# <img src="{{ asset('upload/img/img_site/' ~ sourate.image) }}" alt="Image de {{ sourate.souarte }}"> #}
+                            </li>
+                        {% endfor %} 
+                    </ul>
+
+                   <script>
+    $(document).ready(function() {
+        // Ajout d'un event listener sur les éléments de classe 'sourate'
+        $('.sourate').click(function() {
+            var Nsourate = $(this).val(); // Récupère la valeur de la sourate cliquée
+            console.log({{Numsourate}})
+            // Requête AJAX pour récupérer les pages de la sourate sélectionnée
+            $.ajax({
+                url: '{{ path('app_page_coran') }}', // L'URL de la route vers laquelle envoyer la requête
+                method: 'GET',
+                data: {
+                    numSourate: Nsourate // Envoi du numéro de sourate cliqué
+                },
+                success: function(response) {
+                    console.log(pages)
+                    // Efface les images précédentes dans le carrousel
+                    $('.carouselContainer').html('<h1>dddddddddddddddd</h1>');
+
+                    // Parcours des pages reçues dans la réponse
+                    // response.pages.forEach(function(page, index) {
+                    //     // Ajoute les nouvelles images dans le carrousel
+                    //     $('.carouselContainer').append(
+                    //         `<div class="col-5 p-1 p1">
+                    //             <img class="img-fluid img1" src="{{ asset('upload/img/img_site/') }}${page.image}" alt="Image ${index + 1}" />
+                    //         </div>`
+                    //     );
+                    // });
+
+                    // Met à jour le numéro de page affiché
+                    // $('.numberpage').text(response.pages[0].page_number);
+                },
+                error: function(xhr, status, error) {
+                    console.log('Erreur :', error);
+                }
+            });
+        });
+    });
+</script>
+
+                </div>
+                <div class="divPage">
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-success">
+                                            <i class="fas fa-arrow-left"></i> Précédent
+                        </button>
+                            <span class="numberpage">122</span>
+                        <button class="btn btn-success">
+                            Suivant <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+</div>
+
+    <script src="{{ asset('assets/js/js/bootstrap.bundle.min.js')}}"></script>
+</body>
+</html>
+<script>
+    console.log({{numSourate}})
+</script>

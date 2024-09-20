@@ -91,7 +91,7 @@
     .container-fluid11{
     /*    display: flex;*/
     margin-top:10px;
-    height:13px;
+    height:20px;
     /*    justify-content: center;*/
     /*    align-items: center;*/
     /*    background-color: red;*/
@@ -101,6 +101,12 @@
         text-decoration:none;
         display:center;
         font-weight:bold;
+    }
+    .img1{
+      background-color:red;
+      width:190px;
+      height:40px;
+      margin-top:-5px;
     }
     </style>
                 {% block stylesheets %}
@@ -114,7 +120,7 @@
         {#on va faire le navbar ici #}
         <!-- Bouton pour afficher le menu avec logo -->
     <button data-trigger="navbar_main" class="d-lg-none btn btn-success" type="button">
-    <img src="kl.jpg" alt="Logo" style="height: 30px;"/>
+    <img src="{{ asset('upload/img/img_site/site2.jpg')}}" alt="Logo" style="height: 30px;"/>
     </button>
 
     <!-- Écran d'assombrissement -->
@@ -124,7 +130,7 @@
     <nav id="navbar_main" class="mobile-offcanvas navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container-fluid container-fluid11">
         <ul class="navbar-nav">
-            <h2 class="text-center bg-light p-2 ms-2 me-2" translate="no">xamsa dine</h2>
+          <img class="img1" src="{{ asset('upload/img/img_site/site1.jpg')}}" alt="Logo" />
         <li class="nav-item text-center active"><a class="nav-link" href="#">Accueil</a></li>
         <li class="nav-item text-center"><a class="nav-link" href="#">Horaire de prière</a></li>
         <li class="nav-item text-center"><a class="nav-link" href="#">Doua et supplication</a></li>
@@ -192,4 +198,5 @@
   });
 </script>
     <script src="{{ asset('assets/js/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery.js')}}"></script>
 </html>
