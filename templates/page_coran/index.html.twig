@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecture de livre en mode couleur</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="{{ asset('assets/js/jquery.js')}}"></script>
- <link rel="stylesheet" href="{{ asset('assets/css/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/css/bootstrap.min.css')}}">
     <style>
         body {
             background-color: #f5f5f5;
-            /* padding: 20px; */
         }
         .carousel-item {
             height: 80vh;
@@ -23,102 +21,84 @@
             text-align: center;
         }
         .page-1 {
-            background-color: #6b9bd1; /* Bleu */
+            background-color: #6b9bd1;
         }
-
         .carousel-control-prev-icon,
         .carousel-control-next-icon {
             background-color: black;
             border-radius: 50%;
         }
-
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             .carousel-item {
-                font-size: 1.5rem; /* Réduction de la taille du texte */
+                font-size: 1.5rem;
             }
             .carousel-control-prev-icon,
             .carousel-control-next-icon {
-                width: 2rem; /* Réduction de la taille des icônes */
+                width: 2rem;
                 height: 2rem;
             }
         }
-
         @media (max-width: 576px) {
             .carousel-item {
-                font-size: 1.2rem; /* Réduction encore plus importante pour petits écrans */
+                font-size: 1.2rem;
             }
             .carousel-control-prev-icon,
             .carousel-control-next-icon {
-                width: 1.5rem; /* Encore plus petit pour les très petits écrans */
+                width: 1.5rem;
                 height: 1.5rem;
             }
         }
-        .coranContainer{
-            /* width:90%; */
-            /* height:90vh; */
+        .coranContainer {
             margin:auto;
             border: 5px #198754 solid;
-            /* border:solid; */
         }
         .p1, .p2 {
-            /* width:100%; */
-            /* border:solid; */
             height:100%;
         }
-        .img1{
-
-            /* width:90%; */
+        .img1 {
             height:100%;
             margin:auto;
         }
-        .carouselContainer{
+        .carouselContainer {
             height:90vh;
             border: 5px #198754 solid;
             width:80vw;
         }
-        .divDetailCoran{
+        .divDetailCoran {
             border:11px #198754 solid;
         }
-        .numberpage{
+        .numberpage {
             height:30px;
             width:50px;
             margin:auto;
-            border:none;
-            /* border-radius:10px; */
-            /* outline:none; */
-            /* background-color:white; */
             text-align:center;
             font-weight:bold;
             font-size:130%;
         }
-        .divSourate{
-            /* border:solid; */
+        .divSourate {
             height:85%;
         }
-        .divPage{
-            /* border:solid; */
-            /* height:%; */
-        }
-        .lesSourate{
+        .lesSourate {
             background-color:#198754;
             list-style:none;
-            /* decoration:none; */
             padding:0;
             border:5px #198754 solid;
             height:70vh;
         }
-        .sourate{
+        .sourate {
             letter-spacing:1px;
             border:5px white solid;
             font-size:100%;
             padding:10px;
             color:white;
             cursor:pointer;
-            font-family:arabic;
-
         }
-        .sourate:hover{
+        .sourate:hover {
+            color:#198754;
+            background-color:white;
+            font-weight:bolder;
+        }
+        .sourate.selected {
             color:#198754;
             background-color:white;
             font-weight:bolder;
@@ -128,96 +108,121 @@
 <body>
 
 <div class=" coranContainer">
-    
     <div id="bookCarousel" class="row carousel slide ">
-
         <div class="col col-9">
             <div class="row bg-success carouselContainer d-flex justify-content-center">
-                <!-- Première image (colonne 1) -->
                 <div class="col-5 p-1 p1">
-                                        <img class="img-fluid img1" src="{{ asset('upload/img/img_site/5.png')}}"  alt="Image 1" />
+                    <img class="img-fluid img1" src="{{ asset('upload/img/img_site/5.png')}}" alt="Image 1" />
                 </div>
-                                    
-                <!-- Deuxième image (colonne 2) -->
                 <div class="col-5 p-1 p1">
                     <img class="img-fluid img1" src="{{ asset('upload/img/img_site/6.png')}}" alt="Image 2" />
                 </div>
             </div>
         </div>
-{# {{ dump(sourates) }} #}
+
         <div class="col col-3 bg-light divDetailCoran">
-                <div>
-                    sourate en arabe :
-                </div>
-                <div class="divSourate">
-                    <ul class='lesSourate'>
-                        {% for sourate in sourates %}
-                            <li class="sourate" value="{{ sourate.numero }}" {% if numSourate == sourate.numero %}selected{% endif %}>
-                                Sourate : {{ sourate.souarte }}
-                                {# <img src="{{ asset('upload/img/img_site/' ~ sourate.image) }}" alt="Image de {{ sourate.souarte }}"> #}
-                            </li>
-                        {% endfor %} 
-                    </ul>
+            <div>Sourate en arabe :</div>
+            <div class="divSourate">
+                <ul class='lesSourate'>
+                    {% for sourate in sourates %}
+                        <li class="sourate" data-numero="{{ sourate.numero }}" {% if numSourate == sourate.numero %}class="selected"{% endif %}>
+                            Sourate : {{ sourate.souarte }}
+                        </li>
+                    {% endfor %}
+                </ul>
 
-                   <script>
-    $(document).ready(function() {
-        // Ajout d'un event listener sur les éléments de classe 'sourate'
-        $('.sourate').click(function() {
-            var Nsourate = $(this).val(); // Récupère la valeur de la sourate cliquée
-            console.log({{Numsourate}})
-            // Requête AJAX pour récupérer les pages de la sourate sélectionnée
-            $.ajax({
-                url: '{{ path('app_page_coran') }}', // L'URL de la route vers laquelle envoyer la requête
-                method: 'GET',
-                data: {
-                    numSourate: Nsourate // Envoi du numéro de sourate cliqué
-                },
-                success: function(response) {
-                    console.log(pages)
-                    // Efface les images précédentes dans le carrousel
-                    $('.carouselContainer').html('<h1>dddddddddddddddd</h1>');
 
-                    // Parcours des pages reçues dans la réponse
-                    // response.pages.forEach(function(page, index) {
-                    //     // Ajoute les nouvelles images dans le carrousel
-                    //     $('.carouselContainer').append(
-                    //         `<div class="col-5 p-1 p1">
-                    //             <img class="img-fluid img1" src="{{ asset('upload/img/img_site/') }}${page.image}" alt="Image ${index + 1}" />
-                    //         </div>`
-                    //     );
-                    // });
 
-                    // Met à jour le numéro de page affiché
-                    // $('.numberpage').text(response.pages[0].page_number);
-                },
-                error: function(xhr, status, error) {
-                    console.log('Erreur :', error);
+<script>
+$(document).ready(function() {
+
+    $('.sourate').click(function() {
+        var Nsourate = $(this).data('numero');
+        $('.sourate').removeClass('selected'); // Retirer la classe selected de toutes les sourates
+        $(this).addClass('selected'); // Ajouter la classe selected à la sourate cliquée
+        var p1 = 0; // Index pour la première image
+        var p2 = 1; // Index pour la deuxième image
+        // Récupérer les pages associées à la sourate
+        $.ajax({
+            url: '{{ path('app_page_coran') }}',
+            method: 'GET',
+            data: { numSourate: Nsourate },
+            success: function(response) {
+                var pages = response.pages;
+                console.log(pages);
+                var html = '';
+
+                // Fonction pour afficher les images basées sur les indices p1 et p2
+                function afficherPages() {
+                    html = '';
+
+                    // Si p1 et p2 sont valides, on affiche les images
+                    if (p1 < pages.length) {
+                        html += '<div class="col-5 p-1 p1">';
+                        html += '<img class="img-fluid img1" src="' + '{{ asset("upload/img/coran/") }}' + pages[p1].image + '" alt="Page du Coran" />';
+                        html += '</div>';
+                    }
+
+                    if (p2 < pages.length) {
+                        html += '<div class="col-5 p-1 p1">';
+                        html += '<img class="img-fluid img1" src="' + '{{ asset("upload/img/coran/") }}' + pages[p2].image + '" alt="Page du Coran" />';
+                        html += '</div>';
+                    }
+
+                    // Mettre à jour l'affichage des pages dans le carrousel
+                    $('.carouselContainer').html(html);
+                    $('.numberpage').text(p2)
                 }
-            });
+
+                // Affichage initial des deux premières pages
+                afficherPages();
+
+                // Gérer l'événement de clic sur le bouton "suivant"
+                $('.suivant').off('click').on('click', function() {
+                    // Si p2 est inférieur au nombre total de pages, on incrémente les indices
+                    if (p2 < pages.length - 1) {
+                        p1 += 2;
+                        p2 += 2;
+                        afficherPages();
+                    } else {
+                        alert('Il n\'y a plus de pages suivantes.');
+                    }
+                });
+
+                // Gérer l'événement de clic sur le bouton "précédent"
+                $('.precedent').off('click').on('click', function() {
+                    // Si p1 est supérieur à 0, on décrémente les indices
+                    if (p1 > 0) {
+                        p1 -= 2;
+                        p2 -= 2;
+                        afficherPages();
+                    } else {
+                        alert('Il n\'y a plus de pages précédentes.');
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.log('Erreur :', error);
+            }
         });
     });
+});
 </script>
 
-                </div>
-                <div class="divPage">
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-success">
-                                            <i class="fas fa-arrow-left"></i> Précédent
-                        </button>
-                            <span class="numberpage">122</span>
-                        <button class="btn btn-success">
-                            Suivant <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
 
+
+            </div>
+            <div class="divPage">
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-success precedent"><i class="fas fa-arrow-left"></i> Précédent</button>
+                    <span class="numberpage"></span>
+                    <button class="btn btn-success suivant">Suivant <i class="fas fa-arrow-right"></i></button>
                 </div>
+            </div>
         </div>
     </div>
 </div>
-
-    <script src="{{ asset('assets/js/js/bootstrap.bundle.min.js')}}"></script>
+{# {{ dump(sourates) }} #}
+<script src="{{ asset('assets/js/js/bootstrap.bundle.min.js')}}"></script>
 </body>
 </html>
-<script>
-    console.log({{numSourate}})
-</script>
