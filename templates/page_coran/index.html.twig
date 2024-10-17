@@ -1,82 +1,32 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecture de livre en mode couleur</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="{{ asset('assets/js/jquery.js')}}"></script>
-    <link rel="stylesheet" href="{{ asset('assets/css/css/bootstrap.min.css')}}">
+{% extends 'base.html.twig' %} 
+{% block stylesheets %}
     <style>
         body {
             background-color: #f5f5f5;
         }
-        .carousel-item {
-            height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            color: white;
-            text-align: center;
-        }
-        .page-1 {
-            background-color: #6b9bd1;
-        }
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            background-color: black;
-            border-radius: 50%;
-        }
-        @media (max-width: 768px) {
-            .carousel-item {
-                font-size: 1.5rem;
-            }
-            .carousel-control-prev-icon,
-            .carousel-control-next-icon {
-                width: 2rem;
-                height: 2rem;
-            }
-        }
-        @media (max-width: 576px) {
-            .carousel-item {
-                font-size: 1.2rem;
-            }
-            .carousel-control-prev-icon,
-            .carousel-control-next-icon {
-                width: 1.5rem;
-                height: 1.5rem;
-            }
-        }
-        .coranContainer {
+
+
+        .img11 {
+            /* height:90vh; */
             margin:auto;
-            border: 5px #198754 solid;
-        }
-        .p1, .p2 {
-            height:100%;
-        }
-        .img1 {
-            height:100%;
-            margin:auto;
+            /* width:100%; */
         }
         .carouselContainer {
             height:90vh;
-            border: 5px #198754 solid;
-            width:80vw;
+            margin-top:50px;
+            /* border: 5px solid; */
+            /* width:30vw; */
+            display:flex;
+            justify-content:center;
+            
         }
         .divDetailCoran {
-            border:11px #198754 solid;
-        }
-        .numberpage {
-            height:30px;
-            width:50px;
-            margin:auto;
-            text-align:center;
-            font-weight:bold;
-            font-size:130%;
+            /* border:11px #198754 solid; */
+            margin-top:50px;
         }
         .divSourate {
             height:85%;
+
         }
         .lesSourate {
             background-color:#198754;
@@ -86,12 +36,12 @@
             height:70vh;
         }
         .sourate {
-            letter-spacing:1px;
-            border:5px white solid;
-            font-size:100%;
-            padding:10px;
-            color:white;
-            cursor:pointer;
+            /* letter-spacing:1px; */
+            /* border:5px white solid; */
+            /* font-size:100%; */
+            /* padding:10px;
+            color:white; */
+            cursor:pointer; 
         }
         .sourate:hover {
             color:#198754;
@@ -103,50 +53,192 @@
             background-color:white;
             font-weight:bolder;
         }
+
+        .overflow-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Cacher la barre de défilement sur Firefox */
+        .overflow-scroll {
+            scrollbar-width: none;
+        }
+        .divaudio{
+            margin-top:50px;
+            max-height:80vh;
+        }
+        .divQari{
+            height:100%;
+        }
+        .divAudio1{
+            height:10%;
+        }
+        audio{
+            /* width:100%; */
+            border-radius:10px;
+            margin:auto;
+        }
+
+
+
+        .divAudio1 {
+    background: linear-gradient(135deg, #198754 100%, #6b9bd1 100%);
+    padding: 2px;
+    border-top: 3px solid #ffffff;
+    box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    }
+
+    #audioCoran1 {
+        width: 100%;
+        max-width: 600px;
+        background-color: #fff;
+        border-radius: 12px;
+        outline: none;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    #audioCoran1:hover {
+        transform: translateY(-5px);
+    }
+
+    #audioCoran1::-webkit-media-controls-play-button,
+    #audioCoran1::-webkit-media-controls-mute-button {
+        background-color: #198754;
+        color: #198754;
+        border-radius: 50%;
+        padding: 10px;
+    }
+
+    #audioCoran1::-webkit-media-controls-current-time-display,
+    #audioCoran1::-webkit-media-controls-time-remaining-display {
+        color: #198754;
+        font-weight: bold;
+    }
+
+    #audioCoran1::-webkit-media-controls-timeline {
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+    #audioCoran1::-webkit-media-controls-volume-slider {
+        background-color: #198754;
+        border-radius: 5px;
+    }
+
+    #audioCoran1::-webkit-media-controls-panel {
+        border-radius: 12px;
+    }
+
+    .divAudio1::before {
+        font-size: 1.2rem;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .divAudio1 {
+        animation: slideUp 0.5s ease forwards;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+    .lesQari:hover{
+        background: linear-gradient(135deg, #198754 80%, #6b9bd1 20%);
+        cursor:pointer;
+    }
     </style>
-</head>
-<body>
+
+{% endblock %}
+{% block body %}
+    <script>
+        var idQari = 1;
+        var Nsourate = 1;
+    </script>
 
 <div class=" coranContainer">
-    <div id="bookCarousel" class="row carousel slide ">
-        <div class="col col-9">
-            <div class="row bg-success carouselContainer d-flex justify-content-center">
-                <div class="col-5 p-1 p1">
-                    <img class="img-fluid img1" src="{{ asset('upload/img/img_site/5.png')}}" alt="Image 1" />
-                </div>
-                <div class="col-5 p-1 p1">
-                    <img class="img-fluid img1" src="{{ asset('upload/img/img_site/6.png')}}" alt="Image 2" />
-                </div>
+    <div id="bookCarousel" class="container-fluid row carousel ">
+        <div class="col col-4 bg-light pt-2 overflow-scroll divaudio">
+            <div class=" overflow-scroll divQari">
+                <ul class="list-group border list-group-flush">
+                {% for qari in qaris %}
+                {# {{ dump(qari) }} #}
+                    <div data-idqari={{ qari.id }} class="row page-content page-container p-1 bg-light lesQari">
+                    <img src="{{ asset('upload/img/qari/' ~ qari.image )}}" class="col col-md-2 w-25 "> 
+                        <li class="col col-md-8 list-group-item">{{qari.nom}}</li>
+                    </div>
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="divAudio1 fixed-bottom">
+                <audio id="audioCoran1" preload="true" controls> 
+                    <source id="audiosrc" src="{{ asset('upload/audio/coran/' ~ audio[0].audio )}}" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+        <div class="col col-5">
+            <div class="carouselContainer row overflow-scroll d-flex justify-content-center">
+                {# {{ dump(audio) }} #}
             </div>
         </div>
 
         <div class="col col-3 bg-light divDetailCoran">
             <div>Sourate en arabe :</div>
             <div class="divSourate">
-                <ul class='lesSourate'>
+                <ul class='list-group lesSourate overflow-scroll'>
                     {% for sourate in sourates %}
-                        <li class="sourate" data-numero="{{ sourate.numero }}" {% if numSourate == sourate.numero %}class="selected"{% endif %}>
+                        <li class="list-group-item sourate" data-numero="{{ sourate.numero }}" {% if numSourate == sourate.numero %}class="selected"{% endif %}>
                             Sourate : {{ sourate.souarte }}
                         </li>
                     {% endfor %}
                 </ul>
+    <script>
+// $(document).ready(function() {
+    $(document).ready(function() {
+    $('.lesQari').click(function() {
+        idQari = $(this).data('idqari');
+        // alert(idQari)
+                $.ajax({
+            url: '{{ path('app_page_coran') }}',
+            method: 'GET',
+            data: { numSourate: Nsourate ,IDqari:idQari},
+            success: function(response) {
+                    // Sélectionner l'élément audio
+                    var audioElement = document.getElementById('audioCoran1');  // or use jQuery: var audioElement = $('audio')[0];
+                    var audio = response.audioClick;
+                    $('#audiosrc').attr('src', "{{ asset('upload/audio/coran/') }}" + audio[0].audio);
+                    // Vérifier si l'élément est bien un élément audio
+                    if (audioElement && typeof audioElement.load === 'function') {
+                        audioElement.load();  // Recharger l'élément audio si nécessaire
+                        audioElement.play();
+                    } else {
+                        console.error('L\'élément audio n\'a pas été trouvé ou n\'est pas un élément audio valide.');
+                    }
 
+            }
+                })
+    })
+    })
 
-
-<script>
-$(document).ready(function() {
-
+    $(document).ready(function() {
     $('.sourate').click(function() {
-        var Nsourate = $(this).data('numero');
+        Nsourate = $(this).data('numero');
         $('.sourate').removeClass('selected'); // Retirer la classe selected de toutes les sourates
         $(this).addClass('selected'); // Ajouter la classe selected à la sourate cliquée
-        var p1 = 0; // Index pour la première image
-        var p2 = 1; // Index pour la deuxième image
+        
         // Récupérer les pages associées à la sourate
         $.ajax({
             url: '{{ path('app_page_coran') }}',
             method: 'GET',
-            data: { numSourate: Nsourate },
+            data: { numSourate: Nsourate ,IDqari:idQari},
             success: function(response) {
                 var pages = response.pages;
                 console.log(pages);
@@ -157,49 +249,29 @@ $(document).ready(function() {
                     html = '';
 
                     // Si p1 et p2 sont valides, on affiche les images
-                    if (p1 < pages.length) {
-                        html += '<div class="col-5 p-1 p1">';
-                        html += '<img class="img-fluid img1" src="' + '{{ asset("upload/img/coran/") }}' + pages[p1].image + '" alt="Page du Coran" />';
+                    pages.forEach(page => {
+                        html += '<div class="col col-md-12 border justify-content-center">';
+                        html += '<img class="img-fluid img11" src="' + '{{ asset("upload/img/coran/") }}' + page.image + '" width="700" alt="Page du Coran" />';
                         html += '</div>';
-                    }
-
-                    if (p2 < pages.length) {
-                        html += '<div class="col-5 p-1 p1">';
-                        html += '<img class="img-fluid img1" src="' + '{{ asset("upload/img/coran/") }}' + pages[p2].image + '" alt="Page du Coran" />';
-                        html += '</div>';
-                    }
+                    });
 
                     // Mettre à jour l'affichage des pages dans le carrousel
                     $('.carouselContainer').html(html);
-                    $('.numberpage').text(p2)
+
+                    // Sélectionner l'élément audio
+                    var audioElement = document.querySelector('audio');  // or use jQuery: var audioElement = $('audio')[0];
+                    var audio = response.audioClick;
+                    $('#audiosrc').attr('src', "{{ asset('upload/audio/coran/') }}" + audio[0].audio);
+                    // Vérifier si l'élément est bien un élément audio
+                    if (audioElement && typeof audioElement.load === 'function') {
+                        audioElement.load();  // Recharger l'élément audio si nécessaire
+                    } else {
+                        console.error('L\'élément audio n\'a pas été trouvé ou n\'est pas un élément audio valide.');
+                    }
                 }
 
-                // Affichage initial des deux premières pages
+                // Affichage initial des pages du Coran
                 afficherPages();
-
-                // Gérer l'événement de clic sur le bouton "suivant"
-                $('.suivant').off('click').on('click', function() {
-                    // Si p2 est inférieur au nombre total de pages, on incrémente les indices
-                    if (p2 < pages.length - 1) {
-                        p1 += 2;
-                        p2 += 2;
-                        afficherPages();
-                    } else {
-                        alert('Il n\'y a plus de pages suivantes.');
-                    }
-                });
-
-                // Gérer l'événement de clic sur le bouton "précédent"
-                $('.precedent').off('click').on('click', function() {
-                    // Si p1 est supérieur à 0, on décrémente les indices
-                    if (p1 > 0) {
-                        p1 -= 2;
-                        p2 -= 2;
-                        afficherPages();
-                    } else {
-                        alert('Il n\'y a plus de pages précédentes.');
-                    }
-                });
             },
             error: function(xhr, status, error) {
                 console.log('Erreur :', error);
@@ -207,22 +279,11 @@ $(document).ready(function() {
         });
     });
 });
+
+// });
 </script>
-
-
-
-            </div>
-            <div class="divPage">
-                <div class="d-flex justify-content-between">
-                    <button class="btn btn-success precedent"><i class="fas fa-arrow-left"></i> Précédent</button>
-                    <span class="numberpage"></span>
-                    <button class="btn btn-success suivant">Suivant <i class="fas fa-arrow-right"></i></button>
-                </div>
             </div>
         </div>
     </div>
 </div>
-{# {{ dump(sourates) }} #}
-<script src="{{ asset('assets/js/js/bootstrap.bundle.min.js')}}"></script>
-</body>
-</html>
+{% endblock %}

@@ -1,6 +1,6 @@
 
 <style>
-        .card {
+        .card11 {
             flex: 0 0 auto; /* Empêche la carte de se casser en ligne */
             width: 170px; /* Largeur fixe des cartes */
             margin-right: px; /* Espace entre les cartes */
@@ -81,13 +81,13 @@
             .card-container {
                 padding: 10px 5px; /* Réduit l'espace autour des cartes */
             }
-            .card {
+            .card11 {
                 width: 150px; /* Réduit la largeur des cartes sur les petits écrans */
             }
         }
 
         @media (max-width: 576px) {
-            .card {
+            .card11 {
                 width: 0px; /* Réduit encore plus la largeur des cartes sur les très petits écrans */
             }
             .prayer-card .card-title {
@@ -156,14 +156,14 @@
 
         {% for horaire in horaires %}
 
-            <div class="card border-light prayer-card bg-light">
+            <div class="card card11 border-light prayer-card bg-light">
                 <div class="card-body">
                     <h4 class="text-uppercase small">Heure de priere </h4>
                     <div class="icon">
                         <i class="bi bi-clock"></i> 
                     </div>
                     <h5 class="card-title  text-uppercase small">{{ horaire.priere }}</h5>
-                    <p class="card-text">{{ horaire.heure|date('H:i') }}</p>
+                    <p id="{{ horaire.priere }}" class="card-text">{{ horaire.heure|date('H:i') }}</p>
                 </div>
                 <div class="card-footer">
                     Region : {{ horaire.region }}

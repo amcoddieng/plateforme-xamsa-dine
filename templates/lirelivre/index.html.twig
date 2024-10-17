@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %} 
+{% block stylesheets %}
+    
+<style>
+*{
+    font-size:13px;
+}
+.livre{
+    cursor:pointer;
+}
+.linkLivre{
+    text-decoration:none;
+}
+.img-det-auteur{
+    display:flex;   
+    width:260px;
+    /* border:solid; */
+    margin:auto;
+    height:210px;
+}
+  .overflow-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cacher la barre de défilement sur Firefox */
+  .overflow-scroll {
+    scrollbar-width: none; /* Firefox */
+  }
+  
+</style>
+{% endblock %}
+{% block body %}
+
+    <div class="container mt-5  border vh-100 bg-success">
+        <div class="row mt-2 position-fixed">
+            <div class="col col-md-3 vh-100 bg-success overflow-scroll ">
+                 <div class="w-100 p-auto mt-2">
+                    <div class="col m-auto">
+                        <div class="card livre">
+                            <img src="{{ asset('upload/img/auteur/' ~ auteur.image) }}"  class="img-det-auteur mt-1" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ auteur.nom}}</h5>
+                                <div class="text-muted fs-5 overflow-scroll"  style="height:100px;">{{ auteur.info }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="col col-md-7 mt-2 overflow-scroll vh-100">   
+                <div class="container p-auto bg-light ">
+                <h3 class="text-center bg-light border">Livre : {{ titre }}</h3>
+                {# {{ dump(auteur) }}
+                {{ dump(livre) }} #}
+                {% for img in livre %}
+                    
+                    <img src="{{ asset('upload/img/auteur/' ~ img.image) }}" height="580" width="550" class=" border m-auto" /><br>
+                    <h3 class="text-center bg- border"> Page : {{ img.numero_page }}<br>
+                    
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>    
+{% endblock %}

@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MuezzinRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MuezzinRepository::class)]
+#[Vich\Uploadable]
 class Muezzin
 {
     #[ORM\Id]
@@ -19,11 +22,18 @@ class Muezzin
     #[ORM\Column(length: 255)]
     private ?string $mosque = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $audio = null;
 
     #[ORM\ManyToOne(inversedBy: 'muezzin')]
     private ?Users $users = null;
+
+    // This is not a mapped field of the database, just a virtual property
+    #[Vich\UploadableField(mapping: 'audio_file_adan', fileNameProperty: 'audio')]
+    private ?File $audioFile = null;
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -59,7 +69,7 @@ class Muezzin
         return $this->audio;
     }
 
-    public function setAudio(string $audio): static
+    public function setAudio(?string $audio): static
     {
         $this->audio = $audio;
 
@@ -74,6 +84,35 @@ class Muezzin
     public function setUsers(?Users $users): static
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    // Getter and setter for audioFile
+    public function setAudioFile(?File $audioFile = null): void
+    {
+        $this->audioFile = $audioFile;
+
+        // If the file is uploaded, update the updatedAt field to trigger Doctrine updates
+        if ($audioFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getAudioFile(): ?File
+    {
+        return $this->audioFile;
+    }
+
+    // Getter and setter for updatedAt
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

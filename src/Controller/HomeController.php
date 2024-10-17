@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Entity\HorairePriere;
+use App\Entity\Muezzin;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +20,15 @@ class HomeController extends AbstractController
         $Region = $request->query->get('region', null);
         $isoCode = $request->query->get('isoCode', null);
 
+
+
+
+
+        $eventRepository = $entityManager->getRepository(Event::class);
+        $event = $eventRepository->createQueryBuilder('p')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult();
         // Si le code ISO est dans l'URL, on le stocke en session
         if ($isoCode) {
             $session->set('isoCode', $isoCode);
@@ -28,7 +39,10 @@ class HomeController extends AbstractController
 
         $horaireRepository = $entityManager->getRepository(HorairePriere::class);
         $horaire = [];
-
+        $adanRepository = $entityManager->getRepository(Muezzin::class);
+        $adan = $adanRepository->createQueryBuilder('p')
+        ->getQuery()
+        ->getResult();
         if ($Region) {
             $horaire = $horaireRepository->createQueryBuilder('p')
                 ->where('p.region = :region')
@@ -53,6 +67,8 @@ class HomeController extends AbstractController
             'horaires' => $horaire,
             'Region' => $Region,
             'isoCode' => $isoCode,
+            'events' => $event,
+            'adan' => $adan,
         ]);
     }
 }

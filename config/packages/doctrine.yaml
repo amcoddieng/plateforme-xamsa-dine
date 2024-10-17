@@ -25,6 +25,7 @@ doctrine:
         controller_resolver:
             auto_mapping: false
 
+
 when@test:
     doctrine:
         dbal:
@@ -50,3 +51,13 @@ when@prod:
                     adapter: cache.app
                 doctrine.system_cache_pool:
                     adapter: cache.system
+
+
+    # orm:
+    #     mappings:
+    #         App:
+    #             is_bundle: false
+    #             type: attribute
+    #             dir: '%kernel.project_dir%/src/Entity'
+    #             prefix: 'App\Entity'
+    #             alias: App

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %} 
+{% block stylesheets %}
+<style>
+
+.livre{
+    cursor:pointer;
+}
+.linkLivre{
+    text-decoration:none;
+}
+.img-det-auteur{
+    display:flex;   
+    width:260px;
+    /* border:solid; */
+    margin:auto;
+    height:210px;
+}
+  .overflow-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cacher la barre de défilement sur Firefox */
+  .overflow-scroll {
+    scrollbar-width: none; /* Firefox */
+  }
+  
+</style>
+{% endblock %}
+{% block body %}
+    <div class="container-fluid mt-5 vh-100 bg-success">
+        <div class="row position-fixed mt-2">
+            <div class="col col-md-3 vh-100 bg-success overflow-scroll ">
+                 <div class="w-100 p-auto mt-2">
+                    <div class="col m-auto">
+                        <div class="card livre">
+                            <img src="{{ asset('upload/img/auteur/' ~ auteur.image) }}"  class="img-det-auteur mt-1" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ auteur.nom}}</h5>
+                                <div class="text-muted fs-5 overflow-scroll"  style="height:100px;">{{ auteur.info }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="col col-md-9 border mt-2 overflow-scroll vh-100">   
+                <div class="row bg-light ">
+                <h3 class="text-center">Livre ecrit par {{auteur.nom}}</h3>
+                {# {{ dump(livres) }} #}
+                    {% for livre in livres %}
+                        
+
+                        <div class="w-25 mb-1">
+                            <a class="linkLivre" href="{{ path('app_lirelivre',{'id_livre':livre.titre,'id_auteur':auteur.id})}}">
+                                <div class="card livre">
+                                    <img src="{{ asset('upload/img/auteur/' ~ livre.image) }}" height="250" class="card-img-top border" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ livre.titre}}</h5>
+                                        <div class="text-muted fs-5 overflow-scroll"  style="height:120px;">{{ livre.description }}</div>
+                                    </div>
+                                </div>
+                            </a>
+                            {# </div> #}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controller\Admin;
+
+use App\Entity\Auteur;
 use App\Entity\Compte;
 use App\Entity\Coran;
 use App\Entity\CoranAudio;
@@ -9,7 +11,9 @@ use App\Entity\Moderateur;
 use App\Entity\HorairePriere;
 use App\Entity\Quari;
 use App\Entity\Doua;
+use App\Entity\Livre;
 use App\Entity\Muezzin;
+use App\Entity\QranAudio;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -53,11 +57,13 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('utilisateur', 'fa-solid fa-users', Compte::class);
         yield MenuItem::linkToCrud('Moderateur', 'fa-solid fa-user-tie', Moderateur::class);
         yield MenuItem::linkToCrud('coran', 'fa-solid fa-book-quran', Coran::class);
-        yield MenuItem::linkToCrud('coran en audio', 'fa-solid fa-play', CoranAudio::class);
+        yield MenuItem::linkToCrud('coran en audio', 'fa-solid fa-play', QranAudio::class);
         yield MenuItem::linkToCrud('Quari', 'fa-solid fa-microphone', Quari::class);
         yield MenuItem::linkToCrud('Doua', 'fa-solid fa-hands-holding', Doua::class);
         yield MenuItem::linkToCrud('Evennements', 'fa-solid fa-calendar-days', Event::class);
         yield MenuItem::linkToCrud('Horaire', 'fa-sharp fa-solid fa-clock', HorairePriere::class);
         yield MenuItem::linkToCrud('Muezzin', 'fa-sharp fa-solid fa-mosque', Muezzin::class);
+        yield MenuItem::linkToCrud('Livre', 'fa-sharp fa-solid fa-book', Livre::class);
+        yield MenuItem::linkToCrud('Auteur', 'fa-sharp fa-solid fa-book-reader', Auteur::class);
     }
 }

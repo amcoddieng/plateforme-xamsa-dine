@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CarrousselEventController!{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   <style>
+
+        .card1 {
+            /* background-color: #6b9bd1; Bleu */
+            /* width:30%; */
+            /* height:250px; */
+            /* border:solid; */
+            margin:5px;
+        }
+          .overflow-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Cacher la barre de défilement sur Firefox */
+        .overflow-scroll {
+            scrollbar-width: none; /* Firefox */
+        }
+        .img-event{
+            height:30vh;
+            border-bottom:1px #28a745 solid;
+        }
+    </style><br><br>
+</head>
+
+<div class="container pt-4 text-center"> 
+        <div class="card-deck justify-content-center row ">
+{% for event in events %}
+    <div value={{ event.id }} class="card  m-1 col col-2 p-0">
+        <a href="{{ path('app_carroussel_event',{'id_event': event.id }) }}" class="text-decoration-none text-black">
+            <img class="card-img-top img-event" src="{{ asset('upload/img/event/'~ event.image)}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-uppercase fw-bold" style="font-family: 'Arial', sans-serif;">{{ event.nom }}</h5>
+                <p class="card-text overflow-scroll" style="height:50px">
+                    Date : Le {{ event.dateEvent|date('d/m/Y') }}<br>
+                    Lieu : {{ event.lieu }}
+                </p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Mise à jour le : {{ event.dateAjout|date('d/m/Y') }}</small>
+            </div>
+        </a> 
+    </div>
+{% endfor %}
+
+    </div>
+
+</div>
+{% endblock %}

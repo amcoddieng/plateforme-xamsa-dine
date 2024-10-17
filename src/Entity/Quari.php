@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\QuariRepository;
@@ -22,15 +21,18 @@ class Quari
     private ?string $image = null;
 
     /**
-     * @var Collection<int, CoranAudio>
+     * @var Collection<int, QranAudio>
      */
-    #[ORM\ManyToMany(targetEntity: CoranAudio::class, mappedBy: 'quari')]
-    private Collection $coranAudio;
+    #[ORM\OneToMany(targetEntity: QranAudio::class, mappedBy: 'qari')]
+    private Collection $qranAudio;
 
     public function __construct()
     {
-        $this->coranAudio = new ArrayCollection();
+        $this->qranAudio = new ArrayCollection();
     }
+
+
+  
 
     public function getId(): ?int
     {
@@ -45,7 +47,6 @@ class Quari
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -57,34 +58,44 @@ class Quari
     public function setImage(string $image): static
     {
         $this->image = $image;
-
         return $this;
     }
 
     /**
-     * @return Collection<int, CoranAudio>
+     * @return Collection<int, QranAudio>
      */
-    public function getCoranAudio(): Collection
+    public function getQranAudio(): Collection
     {
-        return $this->coranAudio;
+        return $this->qranAudio;
     }
 
-    public function addCoranAudio(CoranAudio $coranAudio): static
+    public function addQranAudio(QranAudio $qranAudio): static
     {
-        if (!$this->coranAudio->contains($coranAudio)) {
-            $this->coranAudio->add($coranAudio);
-            $coranAudio->addQuari($this);
+        if (!$this->qranAudio->contains($qranAudio)) {
+            $this->qranAudio->add($qranAudio);
+            $qranAudio->setQari($this);
         }
 
         return $this;
     }
 
-    public function removeCoranAudio(CoranAudio $coranAudio): static
+    public function removeQranAudio(QranAudio $qranAudio): static
     {
-        if ($this->coranAudio->removeElement($coranAudio)) {
-            $coranAudio->removeQuari($this);
+        if ($this->qranAudio->removeElement($qranAudio)) {
+            // set the owning side to null (unless already changed)
+            if ($qranAudio->getQari() === $this) {
+                $qranAudio->setQari(null);
+            }
         }
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->nom; // Retourne le nom du Qari
+    }
+
+
+
 }
