@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DouController!{% endblock %}
+
+{% block body %}
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+
+    .arabic-text {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+      text-align: right;
+      font-size: 24px;
+      line-height: 1.8;
+    }
+    .textt{
+      font-family: 'Amiri', serif;
+      font-size: 24px;
+      line-height: 1.8;
+    }
+</style>
+
+<div class="mt-5">
+    {# {{ dump(doua) }} #}
+    
+        {% for Doua in citation %}
+            <div class="card border-light prayer-card bg-light p-3">
+                <div class="card-body">
+                    <h5 class="card-title  text-uppercase small text-center textt border">{{ Doua.titre }}</h5>
+                    <h3 class="card-text float-right arabic-text"> {{ Doua.contenuAr }} </h3><br>
+                    <h4 class="border">Version francais</h4>
+                    <p class="card-text textt"> {{ Doua.contenuFr }} </p>
+                </div>
+                <div class="card-footer textt">
+                   <h4> Signification :</h4> {{ Doua.signification }}
+                </div>
+            </div>
+
+        {% endfor %}
+</div>  
+{% endblock %}

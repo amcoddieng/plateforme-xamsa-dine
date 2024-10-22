@@ -4,8 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Compte;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CompteCrudController extends AbstractCrudController
@@ -15,14 +15,16 @@ class CompteCrudController extends AbstractCrudController
         return Compte::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            IdField::new('id','identifiant')->hideOnForm(),
+            TextField::new('prenom','Prenom'),
+            TextField::new('nom','Nom'),
+            TextField::new('email','E-mail'),
+            ArrayField::new('roles','Roles'),
         ];
     }
-    */
+    
 }
