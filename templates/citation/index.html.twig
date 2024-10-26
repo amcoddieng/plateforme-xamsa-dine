@@ -4,14 +4,15 @@
 
 {% block body %}
 <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+        /* @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap'); */
 
-    .arabic-text {
+    .rrr{
       font-family: 'Amiri', serif;
-      direction: rtl;
-      text-align: right;
+      /* direction: rtl; */
+      text-align: center;
       font-size: 24px;
       line-height: 1.8;
+      border:10px black solid;
     }
     .textt{
       font-family: 'Amiri', serif;
@@ -19,23 +20,24 @@
       line-height: 1.8;
     }
 </style>
-
-<div class="mt-5">
-    {# {{ dump(doua) }} #}
-    
-        {% for Doua in citation %}
-            <div class="card border-light prayer-card bg-light p-3">
-                <div class="card-body">
-                    <h5 class="card-title  text-uppercase small text-center textt border">{{ Doua.titre }}</h5>
-                    <h3 class="card-text float-right arabic-text"> {{ Doua.contenuAr }} </h3><br>
-                    <h4 class="border">Version francais</h4>
-                    <p class="card-text textt"> {{ Doua.contenuFr }} </p>
+{# <div class="bg-red w-100 border"> #}
+    <div class=" bg-light  mt-4  "><br>
+        {# {{ dump(doua) }} #}
+        
+            {% for Doua in citation %}
+                <div class="card w-50 mt-2 text-center border-success m-auto">
+                    <div class="card-body">
+                        <h2 class="card-title  text-uppercase small textt ">CITATION</h2>
+                        <h3 class="card-text"> {{ Doua.contenuOriginal }} </h3><br>
+                        {# <h4 class="">Traduction en francais</h4> #}
+                        <p class="card-text textt"> {{ Doua.contenuTraduit }} </p>
+                    </div>
+                    <div class="card-footer">
+                    <h6> Auteur : {{ Doua.auteur }} </h6>
+                    </div>
                 </div>
-                <div class="card-footer textt">
-                   <h4> Signification :</h4> {{ Doua.signification }}
-                </div>
-            </div>
 
-        {% endfor %}
-</div>  
+            {% endfor %}
+        </div>  
+     {# </div> #}
 {% endblock %}

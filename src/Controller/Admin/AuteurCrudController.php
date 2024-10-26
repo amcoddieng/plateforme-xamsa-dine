@@ -21,7 +21,7 @@ class AuteurCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            NumberField::new('id','id'),
+            NumberField::new('id','id')->onlyOnIndex(),
             TextField::new('nom','nom de l\'ecrvain'),
             ImageField::new('image','image de l\'auteur')
             ->setBasePath('upload/img/auteur')

@@ -18,7 +18,7 @@ class CitationController extends AbstractController
         ->getQuery()
         ->getResult()
         ;
-        return $this->render('dou/index.html.twig', [
+        return $this->render('citation/index.html.twig', [
             'citation' => $citation,
         ]);
     }

@@ -119,7 +119,7 @@
         {#on va faire le navbar ici #}
         <!-- Bouton pour afficher le menu avec logo -->
     <button data-trigger="navbar_main" class="d-lg-none btn btn-success" type="button">
-    <img src="{{ asset('upload/img/img_site/site2.jpg')}}" alt="Logo" style="height: 30px;"/>
+    <img src="" alt="Logo" style="height: 30px;"/>
     </button>
 
     <!-- Écran d'assombrissement -->
@@ -136,14 +136,15 @@
           </script>
     <div class="container-fluid container-fluid11">
         <ul class="navbar-nav">
-          <img class="img1" src="{{ asset('upload/img/img_site/site1.jpg')}}" alt="Logo" />
+          <img class="img1" src="" alt="Logo" />
         <li class="nav-item text-center active"><a class="nav-link" href="{{ path('app_home') }}">Accueil</a></li>
         <li class="nav-item text-center"><a class="nav-link" href="#">Horaire de prière</a></li>
-        <li class="nav-item text-center"><a class="nav-link" href="#">Doua et supplication</a></li>
+        <li class="nav-item text-center"><a class="nav-link" href="{{ path('app_dou') }}">Doua et supplication</a></li>
         <li class="nav-item text-center"><a class="nav-link" href="{{ path('app_page_coran') }}">Al-Quran</a></li>
         <li class="nav-item text-center"><a class="nav-link" href="{{ path('app_auteur') }}">Livre</a></li>
         <li class="nav-item text-center"><a class="nav-link" href="{{ path('app_carroussel_event') }}">Événement</a></li>
-        <li class="nav-item text-center"><a class="nav-link" href="#">À propos</a></li>
+        <li class="nav-item text-center"><a class="nav-link" href="{{ path('app_citation') }}">Citation</a></li>
+        <li class="nav-item text-center"><a class="nav-link" href="#">Forum</a></li>
         <li class="nav-item text-center text-center"><a class="nav-link" href="#">Nous contacter</a></li>
         {% if app.user %}
         <li class="nav-item text-center text-center"><a class=" nav-link nom" href="#">{{ app.user.prenom }} {{ app.user.nom }}</a></li>
@@ -234,7 +235,7 @@
         var minutes = maintenant.getMinutes().toString().padStart(2, '0'); // Format MM
         return heure + ':' + minutes;
     }
-
+console.log(obtenirHeureActuelle())
     // Mettre à jour chaque seconde
     setInterval(() => {
         var heureActuelle = obtenirHeureActuelle();

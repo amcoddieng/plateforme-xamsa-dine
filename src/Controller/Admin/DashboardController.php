@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Auteur;
+use App\Entity\Citation;
+use App\Entity\CommentairePost;
 use App\Entity\Compte;
 use App\Entity\Coran;
 use App\Entity\CoranAudio;
@@ -13,6 +15,7 @@ use App\Entity\Quari;
 use App\Entity\Doua;
 use App\Entity\Livre;
 use App\Entity\Muezzin;
+use App\Entity\Post;
 use App\Entity\QranAudio;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -65,5 +68,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Muezzin', 'fa-sharp fa-solid fa-mosque', Muezzin::class);
         yield MenuItem::linkToCrud('Livre', 'fa-sharp fa-solid fa-book', Livre::class);
         yield MenuItem::linkToCrud('Auteur', 'fa-sharp fa-solid fa-book-reader', Auteur::class);
+        yield MenuItem::linkToCrud('Citation', 'fa-sharp fa-solid fa-book-reader', Citation::class);
+        yield MenuItem::linkToCrud('Poste dans les Forum', 'fa-sharp fa-solid fa-readme', Post::class);
+        yield MenuItem::linkToCrud('Les commentaire', 'fa-sharp fa-solid fa-comment-dots', CommentairePost::class);
     }
 }

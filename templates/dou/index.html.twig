@@ -25,14 +25,14 @@
     {# {{ dump(doua) }} #}
     
         {% for Doua in doua %}
-            <div class="card border-light prayer-card bg-light p-3">
+            <div class="card border-light bg-light p-3">
                 <div class="card-body">
                     <h5 class="card-title  text-uppercase small text-center textt border">{{ Doua.titre }}</h5>
                     <h3 class="card-text float-right arabic-text"> {{ Doua.contenuAr }} </h3><br>
                     <h4 class="border">Version francais</h4>
                     <p class="card-text textt"> {{ Doua.contenuFr }} </p>
                 </div>
-                <div class="card-footer textt">
+                <div class="card-footer textt text-center">
                    <h4> Signification :</h4> {{ Doua.signification }}
                 </div>
             </div>
